@@ -7,7 +7,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 @activity.defn(name="PythonHelloWorld")
-async def PythonHelloWorld(name: str) -> str:
+async def get_hello_world(name: str) -> str:
     return f"Hello {name}"
 
 
@@ -17,7 +17,7 @@ async def main():
     greeting_worker =  worker.Worker(
         client=temporal_client,
         task_queue="polyglot-taskqueue",
-        activities=[PythonHelloWorld],
+        activities=[get_hello_world],
     )
     await greeting_worker.run()
 
